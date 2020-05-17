@@ -1,14 +1,12 @@
 import uvicorn
 import pandas as pd
-
 import pickle
-
-from fastapi import FastAPI
-import numpy as np
+from fastapi import FastAPI, File, UploadFile
+from sklearn.preprocessing import LabelEncoder
 
 app = FastAPI()
-saved_model = 'xgb_model.pkl'
-with open('xgb_model.pkl', 'rb') as file:
+saved_model = 'House Rent/xgb_model.pkl'
+with open(saved_model, 'rb') as file:
     Pickled_XGB_Model = pickle.load(file)
 
 
@@ -29,6 +27,18 @@ def predict():
     values = Pickled_XGB_Model.predict(to_predict)
     print(values)
     return {'Output': values}
+
+
+@app.post("/predict_file")
+async def predict_file(file: UploadFile = File(...)):
+    dataFrame = pd.read_csv(file.file)
+    le = LabelEncoder()
+    dataFrame['region'] = le.fit_transform(dataFrame['region'])
+    dataFrame['laundry_options'] = le.fit_transform(dataFrame['laundry_options'])
+    dataFrame['parking_options'] = le.fit_transform(dataFrame['parking_options'])
+    dataFrame['type'] = le.fit_transform(dataFrame['type'])
+    prediction = Pickled_XGB_Model.predict(dataFrame)
+    return {"predicted": str(prediction)}
 
 
 if __name__ == '__main__':
