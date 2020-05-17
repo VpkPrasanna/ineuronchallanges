@@ -1,0 +1,6 @@
+region,type,sqfeet,beds,baths,cats_allowed,dogs_allowed,smoking_allowed,wheelchair_access,electric_vehicle_charge,comes_furnished,laundry_options,parking_options,lat,long
+birmingham,apartment,1908,3,2,1,1,1,0,0,0,laundry on site,street parking,33.4226,-86.7065
+birmingham,apartment,1319,3,2,1,1,1,0,0,0,laundry on site,off-street parking,33.3755,-86.8045
+birmingham,apartment,1133,1,1.5,1,1,1,0,0,0,laundry on site,street parking,33.4226,-86.7065
+birmingham,apartment,927,1,1,1,1,1,0,0,0,laundry on site,street parking,33.4226,-86.7065
+birmingham,apartment,1047,2,1,1,1,1,0,0,0,laundry on site,street parking,33.4226,-86.7065
