@@ -1,32 +1,38 @@
 import uvicorn
 import pandas as pd
 import pickle
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, Form
 from sklearn.preprocessing import LabelEncoder
 
 app = FastAPI()
+
 saved_model = 'House Rent/xgb_model.pkl'
 with open(saved_model, 'rb') as file:
     Pickled_XGB_Model = pickle.load(file)
 
 
-@app.get("/predict")
-def predict():
-    # X_test = [['region', 'type', 'sqfeet', 'beds', 'baths', 'cats_allowed', 'dogs_allowed', 'smoking_allowed',
-    #            'wheelchair_access', 'electric_vehicle_charge', 'comes_furnished', 'laundry_options', 'parking_options',
-    # 'lat', 'long'],
-    # [13, 11, 887, 2, 1.0, 0, 0, 1, 0, 0, 0, 1, 1, 35.3384, -119.063]]
-    # column_names = X_test.pop(0)
-    # datas = pd.DataFrame(X_test, columns=column_names)
+@app.route("/")
+def welcome():
+    return "Welcome all to the project"
+
+
+@app.post(
+    "/singlePredict/{region,type,sqfeet,beds,baths,cats_allowed,dogs_allowed,smoking_allowed,wheelchair_access,electric_vehicle_charge,comes_furnished,laundry_options,parking_options,lat,long}")
+def predict(region: str, type: str, sqfeet: float, beds: int, baths: int, cats_allowed: int, dogs_allowed: int,
+            smoking_allowed: int, wheelchair_access: int, electric_vehicle_charge: int, comes_furnished: int,
+            laundry_options: str, parking_options: str, lat: float, long: float):
     labels = ['region', 'type', 'sqfeet', 'beds', 'baths', 'cats_allowed', 'dogs_allowed', 'smoking_allowed',
               'wheelchair_access', 'electric_vehicle_charge', 'comes_furnished', 'laundry_options', 'parking_options',
               'lat', 'long']
-    features = [[13, 11, 887, 2, 1.0, 0, 0, 1, 0, 0, 0, 1, 1, 35.3384, -119.063]]
+    features = [[region, type, sqfeet, beds, baths, cats_allowed, dogs_allowed, smoking_allowed, wheelchair_access, electric_vehicle_charge, comes_furnished, laundry_options, parking_options, lat, long]]
     to_predict = pd.DataFrame(features, columns=labels)
-    print(to_predict)
+    le = LabelEncoder()
+    to_predict['region'] = le.fit_transform(to_predict['region'])
+    to_predict['laundry_options'] = le.fit_transform(to_predict['laundry_options'])
+    to_predict['parking_options'] = le.fit_transform(to_predict['parking_options'])
+    to_predict['type'] = le.fit_transform(to_predict['type'])
     values = Pickled_XGB_Model.predict(to_predict)
-    print(values)
-    return {'Output': values}
+    return {'Output': int(values[0])}
 
 
 @app.post("/predict_file")
