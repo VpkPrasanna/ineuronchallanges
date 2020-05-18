@@ -6,14 +6,9 @@ from sklearn.preprocessing import LabelEncoder
 
 app = FastAPI()
 
-saved_model = 'House Rent/xgb_model.pkl'
+saved_model = 'xgb_model.pkl'
 with open(saved_model, 'rb') as file:
     Pickled_XGB_Model = pickle.load(file)
-
-
-@app.route("/")
-def welcome():
-    return "Welcome all to the project"
 
 
 @app.post(
