@@ -1,12 +1,12 @@
 import uvicorn
 import pandas as pd
 import pickle
-from fastapi import FastAPI, File, UploadFile, Form
+from fastapi import FastAPI, File, UploadFile
 from sklearn.preprocessing import LabelEncoder
 
 app = FastAPI()
 
-saved_model = 'xgb_model.pkl'
+saved_model = 'models/xgb_model.pkl'
 with open(saved_model, 'rb') as file:
     Pickled_XGB_Model = pickle.load(file)
 
