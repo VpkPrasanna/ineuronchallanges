@@ -1,0 +1,9 @@
+age,job,marital,education,default,housing,loan,contact,month,day_of_week,duration,campaign,pdays,previous,poutcome,emp.var.rate,cons.price.idx,cons.conf.idx,euribor3m,nr.employed
+37,admin.,married,high.school,no,yes,no,telephone,may,mon,172,1,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
+35,technician,married,university.degree,no,no,yes,telephone,may,mon,99,1,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
+59,technician,married,unknown,no,yes,no,telephone,may,mon,93,1,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
+39,self-employed,married,basic.9y,unknown,no,no,telephone,may,mon,233,1,999,0,nonexistent,1.1,93.994,-36.4,4.857,5191
+58,housemaid,single,professional.course,no,no,yes,cellular,apr,thu,335,1,999,0,nonexistent,-1.8,93.749,-34.6,0.64,5008.7
+26,unemployed,single,university.degree,no,yes,no,cellular,apr,thu,618,1,999,0,nonexistent,-1.8,93.749,-34.6,0.64,5008.7
+71,retired,married,professional.course,no,no,no,cellular,apr,thu,559,1,999,0,nonexistent,-1.8,93.749,-34.6,0.64,5008.7
+53,technician,married,university.degree,no,unknown,unknown,cellular,apr,thu,758,2,999,2,failure,-1.8,93.749,-34.6,0.64,5008.7
